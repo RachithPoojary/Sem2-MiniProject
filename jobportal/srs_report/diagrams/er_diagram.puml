@@ -1,0 +1,49 @@
+@startuml
+title Figure 2: ER Diagram - VJTI Launchpad
+entity "User" as U {
+  * _id : ObjectId
+  --
+  fullname : String
+  email : String
+  phoneNumber : Number
+  password : String
+  role : Enum(student,recruiter)
+  profile : Document
+}
+entity "Company" as C {
+  * _id : ObjectId
+  --
+  name : String
+  description : String
+  website : String
+  location : String
+  logo : String
+  userId : ObjectId
+}
+entity "Job" as J {
+  * _id : ObjectId
+  --
+  title : String
+  description : String
+  requirements : Array[String]
+  salary : String
+  experienceLevel : String
+  location : String
+  jobType : String
+  position : Number
+  company : ObjectId
+  created_by : ObjectId
+}
+entity "Application" as A {
+  * _id : ObjectId
+  --
+  job : ObjectId
+  applicant : ObjectId
+  status : Enum(pending,accepted,rejected)
+}
+
+U ||--o{ C : registers
+C ||--o{ J : posts
+J ||--o{ A : receives
+U ||--o{ A : applies
+@enduml

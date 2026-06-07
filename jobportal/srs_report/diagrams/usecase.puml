@@ -1,0 +1,20 @@
+@startuml
+title Figure 3: Use Case Diagram - VJTI Launchpad
+actor Student
+actor Recruiter
+
+Student --> (Register)
+Student --> (Login)
+Student --> (Update Profile)
+Student --> (Search Jobs)
+Student --> (View Job Details)
+Student --> (Apply for Job)
+Student --> (View Applied Jobs)
+
+Recruiter --> (Register)
+Recruiter --> (Login)
+Recruiter --> (Register Company)
+Recruiter --> (Post Job)
+Recruiter --> (View Applicants)
+Recruiter --> (Update Application Status)
+@enduml

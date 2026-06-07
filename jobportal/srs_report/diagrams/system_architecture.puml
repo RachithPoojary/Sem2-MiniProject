@@ -1,0 +1,18 @@
+@startuml
+title Figure 1: System Architecture - VJTI Launchpad
+actor "User (Browser)" as User
+rectangle "React SPA\n(Vite + Redux)" as SPA
+rectangle "REST API\nNode.js + Express" as API
+database "MongoDB\n(Mongoose)" as DB
+cloud "Cloudinary\n(Assets)" as Cloud
+
+User --> SPA : Interacts (UI)
+SPA --> API : HTTPS REST (withCredentials)
+API --> DB : CRUD (Mongoose)
+API --> Cloud : Upload files (Cloudinary SDK)
+
+note right of API
+ Authentication: JWT in cookie
+ Routes: /api/v1/user, /company, /job, /application
+end note
+@enduml

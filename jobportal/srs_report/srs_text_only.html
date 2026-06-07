@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SRS - VJTI Launchpad (Text Only)</title>
+  <style>
+    body { font-family: Georgia, 'Times New Roman', serif; margin: 48px; color:#111; line-height:1.45 }
+    h1 { font-size: 22px; margin-bottom: 6px }
+    h2 { font-size: 18px; color: #1f4e79 }
+    h3 { font-size: 16px; color:#1f4e79 }
+    .page-break { page-break-after: always }
+    pre { white-space: pre-wrap; font-family: inherit }
+    table { width:100%; border-collapse: collapse; margin:12px 0 }
+    th, td { border: 1px solid #ddd; padding:6px }
+    th { background:#f7fbff }
+  </style>
+</head>
+<body>
+  <h1>Software Requirements Specification (SRS)</h1>
+  <h2>VJTI Launchpad / Job Hunt Platform</h2>
+  <p><strong>Version:</strong> 1.0 &nbsp;&nbsp; <strong>Date:</strong> 26 May 2026</p>
+
+  <div class="page-break"></div>
+
+  <h2>1. Cover Page</h2>
+  <p>Job Portal — Software Requirements Specification (SRS)</p>
+  <p>Prepared for: Academic Submission / Final Year Project</p>
+
+  <h2>2. Certificate</h2>
+  <p>This is to certify that the work presented in this Software Requirements Specification (SRS) document titled "Job Portal — Software Requirements Specification" is the original work of the authors and has been carried out under the guidance of the faculty supervisor. The document is submitted in partial fulfillment of the requirements for the degree of [Degree Name] at [Institution Name].</p>
+
+  <div class="page-break"></div>
+
+  <h2>3. Declaration</h2>
+  <p>I hereby declare that the work presented in this SRS document is my own and has not been submitted earlier for any degree or diploma to any university or other institution.</p>
+
+  <h2>4. Acknowledgement</h2>
+  <p>We gratefully acknowledge the guidance and support of our project supervisor and faculty members.</p>
+
+  <div class="page-break"></div>
+
+  <h2>5. Abstract</h2>
+  <p>This document contains the Software Requirements Specification for the Job Portal project.</p>
+
+  <h2>6. Table of Contents</h2>
+  <p>(See full SRS markdown in repository for table of contents.)</p>
+
+  <div class="page-break"></div>
+
+  <h2>7. Introduction</h2>
+  <h3>7.1 Purpose of this Document</h3>
+  <p>This SRS documents the requirements for the Job Portal web application. It defines the functional and non-functional requirements, system architecture expectations, database schema, API endpoints, validation rules, security expectations, test cases and risk considerations.</p>
+
+  <h3>7.2 Intended Audience</h3>
+  <p>Project Supervisor, Developers, Testers, Maintainers.</p>
+
+  <div class="page-break"></div>
+
+  <h2>8. Purpose</h2>
+  <p>The Job Portal provides an online platform for job discovery and application management including profile management, company registration, job posting, and application workflows.</p>
+
+  <div class="page-break"></div>
+
+  <h2>9. Scope</h2>
+  <p>Web-based front-end (React + Vite), RESTful backend (Node/Express), MongoDB, Cloudinary for file storage.</p>
+
+  <div class="page-break"></div>
+
+  <h2>10. Product Features</h2>
+  <ul>
+    <li>Authentication & Authorization</li>
+    <li>Company Management</li>
+    <li>Job Management</li>
+    <li>Application Management</li>
+    <li>Profile Management</li>
+    <li>Search & Filtering</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h2>11. Functional Requirements (selected)</h2>
+  <table>
+    <tr><th>ID</th><th>Requirement</th></tr>
+    <tr><td>FR-1</td><td>User Registration: create user with hashed password.</td></tr>
+    <tr><td>FR-2</td><td>User Login: authenticate and set JWT cookie.</td></tr>
+    <tr><td>FR-8</td><td>Post Job: recruiter posts new job.</td></tr>
+    <tr><td>FR-12</td><td>Apply Job: create Application, prevent duplicates.</td></tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <h2>12. Database Design</h2>
+  <p>Collections: users, companies, jobs, applications. See repository models for exact schema definitions.</p>
+
+  <div class="page-break"></div>
+
+  <h2>13. API Summary</h2>
+  <p>Key endpoints include /api/v1/user/register, /api/v1/user/login, /api/v1/job/post, /api/v1/application/apply/:id (should be POST).</p>
+
+  <div class="page-break"></div>
+
+  <h2>14. Security</h2>
+  <p>Recommendations: set cookie httpOnly & secure; validate uploads; rate-limit login; add owner checks.</p>
+
+  <div class="page-break"></div>
+
+  <h2>15. Testing</h2>
+  <p>Suggested tools: Jest, Supertest, React Testing Library, Cypress. Use separate test DB and mock Cloudinary.</p>
+
+  <div class="page-break"></div>
+
+  <h2>16. Diagrams (textual)</h2>
+  <p>Textual descriptions of System Architecture, ER Diagram, Use Case, DFD Level 0/1, Activity, Sequence, Component and Deployment diagrams are included in the full markdown file.</p>
+
+  <div class="page-break"></div>
+
+  <h2>17. Screenshots Placeholders</h2>
+  <p>Placeholders for Home, Login, Signup, Profile, Job Listings, Job Description, Apply Confirmation, Recruiter Dashboard, Company Management, Post Job Form, Applicants Management.</p>
+
+  <div class="page-break"></div>
+
+  <h2>18. Risk Analysis</h2>
+  <p>Key risks include cookie configuration, memory usage with file uploads, authorization checks, and malicious uploads. Mitigations are documented in the SRS markdown.</p>
+
+  <div class="page-break"></div>
+
+  <h2>19. Conclusion</h2>
+  <p>This document is a complete SRS for the Job Portal project. Use the markdown file for detailed references and PDF generation.</p>
+
+  <footer>
+    <p style="font-size:0.9em;color:#666;">SRS Text-only HTML — ready to print to PDF</p>
+  </footer>
+</body>
+</html>

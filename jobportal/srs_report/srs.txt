@@ -1,0 +1,528 @@
+Software Requirements Specification (SRS)
+
+Project: VJTI Launchpad / Job Hunt Platform
+
+Version: 1.0
+
+Date: 26 May 2026
+
+---
+
+1. Cover Page
+
+Job Portal — Software Requirements Specification (SRS)
+
+Version: 1.0
+
+Date: 26 May 2026
+
+Prepared for: Academic Submission / Final Year Project
+
+Prepared by: [Student / Team Name]
+
+Supervisor: [Supervisor Name]
+
+Contact: [email@example.com]
+
+Repository path: /Users/rachith/Desktop/mp/jobportal
+
+---
+
+2. Certificate
+
+This is to certify that the work presented in this Software Requirements Specification (SRS) document titled "Job Portal — Software Requirements Specification" is the original work of the authors and has been carried out under the guidance of the faculty supervisor. The document is submitted in partial fulfillment of the requirements for the degree of [Degree Name] at [Institution Name].
+
+Signatures:
+
+_________________________  Date: ______________
+
+(Author / Student)
+
+_________________________  Date: ______________
+
+(Supervisor)
+
+---
+
+3. Declaration
+
+I hereby declare that the work presented in this SRS document is my own and has not been submitted earlier for any degree or diploma to any university or other institution. All sources of information and references used have been duly cited.
+
+Name: [Student Name]
+
+Signature: ___________________
+
+Date: 26 May 2026
+
+---
+
+4. Acknowledgement
+
+We gratefully acknowledge the guidance, support, and constructive feedback of our project supervisor and faculty members who helped refine the objectives and scope of this project. We also acknowledge the open-source projects and libraries used in this work. Thanks to peers and testers who provided valuable insights during early verification and validation of the prototype.
+
+---
+
+5. Abstract
+
+This Software Requirements Specification (SRS) documents the functional and non-functional requirements for the Job Portal / Job Hunt Platform. The platform connects students/job-seekers with recruiters/employers, enabling user account management, company registration and editing, job posting and search, application creation and review, and status tracking. The SRS follows IEEE conventions and provides comprehensive system descriptions, features, database and API design, security and validation requirements, testing strategies, risk analysis, future enhancements, and textual descriptions of diagrams required for formal documentation.
+
+---
+
+6. Table of Contents
+
+1. Cover Page
+2. Certificate
+3. Declaration
+4. Acknowledgement
+5. Abstract
+6. Table of Contents
+7. List of Figures (textual)
+8. List of Tables
+9. Introduction
+  9.1 Purpose of this Document
+  9.2 Intended Audience
+  9.3 Document Conventions
+10. Purpose
+11. Scope
+12. Definitions, Acronyms & Abbreviations
+13. References
+14. Overall Description
+  14.1 Product Perspective
+  14.2 Product Functions
+  14.3 User Classes and Characteristics
+  14.4 Operating Environment
+  14.5 Design Constraints
+  14.6 Assumptions and Dependencies
+15. Product Features
+16. Functional Requirements
+17. Non-Functional Requirements
+18. External Interface Requirements
+19. System Features
+  19.1 Authentication Module
+  19.2 Job Management Module
+  19.3 Company Management Module
+  19.4 Application Management Module
+  19.5 Recruiter Dashboard Module
+  19.6 Student/User Module
+20. Database Design
+21. API Design
+22. Security Requirements
+23. Performance Requirements
+24. Software Quality Attributes
+25. Error Handling
+26. Validation Rules
+27. Testing Strategies
+28. Test Cases
+29. Risk Analysis
+30. Feasibility Study
+31. Future Enhancements
+32. Conclusion
+33. Appendix
+34. Bibliography
+35. References
+36. Screenshots placeholders (textual)
+37. Diagram textual descriptions
+38. Tables
+
+---
+
+7. List of Figures (textual)
+
+Note: This SRS version intentionally contains no images. The following is a list of diagrams that are described in textual form later in this document. The diagram descriptions are sufficient to recreate visual diagrams for submission.
+
+- Figure 1: System Architecture — textual description
+- Figure 2: Entity-Relationship (ER) Diagram — textual description
+- Figure 3: Use Case Diagram — textual description
+- Figure 4: Data Flow Diagram (DFD) Level 0 — textual description
+- Figure 5: Data Flow Diagram (DFD) Level 1 — textual description
+- Figure 6: Activity Diagram — textual description
+- Figure 7: Sequence Diagram — textual description
+- Figure 8: Component Diagram — textual description
+- Figure 9: Deployment Diagram — textual description
+
+---
+
+8. List of Tables
+
+- Table 1: Functional Requirements (Identifiers and details)
+- Table 2: Non-functional Requirements
+- Table 3: User Roles and Permissions
+- Table 4: Database Tables and Attributes
+- Table 5: API Summary
+- Table 6: Test Cases
+- Table 7: Hardware Requirements
+- Table 8: Software Requirements
+- Table 9: Risk Analysis
+- Table 10: Validation Rules
+
+---
+
+9. Introduction
+
+9.1 Purpose of this Document
+
+This Software Requirements Specification (SRS) documents the requirements for the Job Portal web application. It defines the functional and non-functional requirements, system architecture expectations, database schema, API endpoints, validation rules, security expectations, test cases and risk considerations. The document serves as the contract between stakeholders (students, recruiters, supervisors) and the development team.
+
+9.2 Intended Audience
+
+- Project Supervisor and Evaluation Committee
+- Developers and DevOps Engineers
+- Testers and QA Engineers
+- Future maintainers and extension teams
+
+9.3 Document Conventions
+
+- IEEE-style numbered headings.
+- Terminology: “user” is generic; “student” and “recruiter” denote role-specific users.
+- Endpoints are in the form /api/v1/... and refer to HTTP methods (GET/POST/PUT).
+- Where codebase specifics were absent, reasonable assumptions were documented.
+
+---
+
+10. Purpose
+
+The Job Portal provides an online platform for job discovery and application management. Its objectives include:
+
+- Allowing students to register, build profiles, upload resumes and apply to posted jobs.
+- Enabling recruiters to register companies, post job listings, review applicant lists and update application statuses.
+- Providing secure authentication and role-specific access control.
+- Offering a searchable and user-friendly interface for job discovery and administrative workflows.
+
+---
+
+11. Scope
+
+In scope:
+
+- Web-based front-end (React + Vite) and REST API back-end (Node.js + Express).
+- Authentication via JWT and cookie-based storage.
+- Core modules: user auth/profile, company management, job posting and search, application management.
+- File uploads handled with multer → DataURI → Cloudinary.
+
+Out of scope (not implemented in current codebase):
+
+- Email verification & password reset flows.
+- Payment or premium features.
+- Advanced analytics beyond basic listings and counts.
+- Native mobile application (although responsive web is supported).
+
+---
+
+12. Definitions, Acronyms & Abbreviations
+
+Definitions:
+- Applicant: Student applying for a job.
+- Recruiter: Employer or recruiter posting jobs.
+- Application: Documented instance of a candidate applying to a job.
+
+Acronyms:
+- SRS — Software Requirements Specification
+- API — Application Programming Interface
+- SPA — Single Page Application
+- DB — Database
+- JWT — JSON Web Token
+- UI — User Interface
+- UX — User Experience
+
+---
+
+13. References
+
+- IEEE Std 830-1998 — Recommended Practice for Software Requirements Specifications.
+- ReactJS documentation — https://reactjs.org
+- Express documentation — https://expressjs.com
+- Mongoose documentation — https://mongoosejs.com
+- Cloudinary docs — https://cloudinary.com/documentation
+- JWT specification — https://jwt.io/introduction
+
+---
+
+14. Overall Description
+
+14.1 Product Perspective
+
+The Job Portal is a standalone web application featuring a decoupled front-end SPA and a RESTful back-end. It integrates with Cloudinary for file storage and requires a MongoDB instance. The front-end communicates with the back-end over HTTP(S) and authenticates users using JWT stored in cookies.
+
+14.2 Product Functions (high level)
+
+- User management: registration, login, logout, profile update.
+- Recruiter-specific: company registration/editing, job posting, applicant review.
+- Candidate-specific: search jobs, apply for jobs, view applied jobs/status.
+- File handling: profile image upload and resume upload to Cloudinary.
+- Search: server-side keyword search with client-side filtering.
+
+14.3 User Classes and Characteristics
+
+- Student: basic user, less technical; primary goal is to find jobs and apply.
+- Recruiter: business user; manages companies and job postings; reviews applicants.
+- System Administrator (implicit): responsible for deployment and infrastructure (not a distinct in-app role).
+
+14.4 Operating Environment
+
+- Front-end: Modern browsers (Chrome, Firefox, Safari, Edge).
+- Back-end: Node.js runtime, Express web server.
+- Database: MongoDB accessible via connection string (MONGO_URI).
+- External services: Cloudinary (CLOUD_NAME, API_KEY, API_SECRET).
+- Development: Vite for frontend; nodemon for backend development.
+
+14.5 Design Constraints
+
+- Use of REST API endpoints with existing route patterns (/api/v1/...).
+- Files are handled using multer memory storage in current implementation—this affects memory usage on the server.
+- JWT tokens stored in cookies; cookie options must be set appropriately for security.
+
+14.6 Assumptions and Dependencies
+
+- Cloudinary account exists and credentials are provided via environment variables.
+- Production will use HTTPS and environment variables set securely.
+- Users provide valid resumes and images; file-type & size validation should be enforced.
+
+---
+
+15. Product Features
+
+15.1 Authentication & Authorization
+
+- Account creation (student/recruiter), login and logout.
+- JWT-based authentication with token stored in cookie.
+- Role checks: recruiter or student determines accessible UI and API behaviours.
+
+15.2 Company Management
+
+- Company registration by recruiters; company details (name, description, website, location, logo) management.
+
+15.3 Job Management
+
+- Recruiter creates job posts that include structured fields; job listings are searchable and paginated.
+
+15.4 Application Management
+
+- Students can apply to jobs; recruiters can see applicants and change application statuses (pending, accepted, rejected).
+
+15.5 Profile Management
+
+- Students and recruiters can update profile fields and upload profile picture/resume.
+
+15.6 Search & Filtering
+
+- Server-side keyword search on title & description; client-side filters (location, jobType) in the UI.
+
+---
+
+16. Functional Requirements
+
+Table 1 — Functional Requirements (detailed)
+
+ID | Title | Description / Acceptance Criteria
+FR-1 | User Registration | User signs up with required fields; password hashed; user stored; duplicate emails rejected.
+FR-2 | User Login | Authentication with email+password+role; cookie token set; user returned.
+FR-3 | User Logout | Cookie cleared and user logged out.
+FR-4 | Update Profile | Authenticated user can update profile info; resume uploaded to Cloudinary; resume original name saved.
+FR-5 | Company Registration | Recruiter can register a company with unique name; company associated with recruiter.
+FR-6 | Get Companies | Recruiter retrieves companies they created.
+FR-7 | Update Company | Recruiter updates company info and uploads logo; only owner allowed to update.
+FR-8 | Post Job | Recruiter posts job with required fields; job persisted; requirements stored as array.
+FR-9 | Get All Jobs / Search | Jobs returned based on optional keyword; jobs populated with company.
+FR-10 | Get Job By ID | Return job with applications populated.
+FR-11 | Get Admin Jobs | Return jobs where created_by == recruiter id.
+FR-12 | Apply Job | Student applies to job; duplicate applications prevented; application created and job.applications updated.
+FR-13 | Get Applied Jobs | Student retrieves their applications with job and company details.
+FR-14 | Get Applicants | Recruiter retrieves applicants for a job with applicant details populated.
+FR-15 | Update Application Status | Recruiter updates application status (pending/accepted/rejected).
+FR-16 | File Upload Handling | Files uploaded via multer -> DataURI -> Cloudinary; secure URLs stored in DB.
+
+Each FR is mapped to controllers and routes in the codebase and must be covered by unit/integration tests.
+
+---
+
+17. Non-Functional Requirements
+
+Table 2 — Non-functional Requirements
+
+ID | Category | Requirement | Metric
+NFR1 | Performance | Average GET response < 300 ms under low load | Median response < 300 ms
+NFR2 | Scalability | Support horizontal scaling; stateless servers; use Cloudinary for assets | Stateless API; DB scalable
+NFR3 | Security | Passwords hashed; cookies httpOnly & secure in production; JWT expiry 24h | Security controls enforced
+NFR4 | Reliability | 99.5% uptime target for production | Monitoring & redundancy
+NFR5 | Maintainability | Clear MVC separation; modular controllers; documented APIs | Documentation included
+NFR6 | Usability | Primary flows complete in <= 3 clicks | Usability testing
+NFR7 | Portability | Deployable on Node.js-supported hosts; DB as MongoDB | Cross-platform
+
+---
+
+18. External Interface Requirements
+
+18.1 User Interfaces: Front-end SPA pages: Home, Jobs, Job Description, Login, Signup, Profile, Admin pages.
+
+18.2 Hardware Interfaces: No direct hardware interaction; standard server hardware required.
+
+18.3 Software Interfaces: REST API endpoints (see Section 21); Cloudinary SDK integration for file uploads.
+
+18.4 Communication Interfaces: HTTP/HTTPS for all client-server communication; CORS configured for development origin.
+
+---
+
+19. System Features
+
+19.1 Authentication Module: JWT creation, verification, cookie settings; bcrypt hashing.
+19.2 Job Management Module: CRUD jobs, search, populate company.
+19.3 Company Management Module: CRUD companies, logo upload.
+19.4 Application Management Module: Create/read/update application, status transitions.
+19.5 Recruiter Dashboard Module: view recruiter-specific assets.
+19.6 Student/User Module: profile management and applied jobs.
+
+---
+
+20. Database Design
+
+20.1 Collections and Attributes
+Users: _id, fullname, email, phoneNumber, password, role, profile{bio,skills,resume, resumeOriginalName, company, profilePhoto}, timestamps.
+Companies: _id, name, description, website, location, logo, userId, timestamps.
+Jobs: _id, title, description, requirements, salary, experienceLevel, location, jobType, position, company, created_by, applications, timestamps.
+Applications: _id, job, applicant, status, timestamps.
+
+20.2 Relationships: User->Companies (1..*), Company->Jobs (1..*), Job->Applications (1..*), User->Applications (1..*).
+
+---
+
+21. API Design
+
+See detailed table in markdown for complete endpoint summaries. Key endpoints include user register/login, profile update, company register/update, job post/get, application apply/get/status update.
+
+---
+
+22. Security Requirements
+
+22.1 Authentication and Session Management: JWT, secure cookies (httpOnly, secure in production), token expiry 24h.
+22.2 Password Protection: bcrypt salt rounds >= 10.
+22.3 Input Validation & Sanitization: express-validator recommended.
+22.4 File Upload Controls: MIME/type checks, size limits, streaming uploads.
+22.5 Authorization: owner checks on resource updates.
+22.6 Transport Layer Security: HTTPS in production.
+22.7 Operational Security: rate-limiting and logging.
+
+---
+
+23. Performance Requirements
+
+Target response times, scalability considerations, and resource utilization guidance described.
+
+---
+
+24. Software Quality Attributes
+
+Maintainability, Testability, Reliability, Usability, Security.
+
+---
+
+25. Error Handling
+
+Centralized error middleware; no stack traces in production; structured JSON error responses.
+
+---
+
+26. Validation Rules
+
+See Table 10 in markdown: rules for fullname, email, phoneNumber, password, role, job fields, file uploads, application.status.
+
+---
+
+27. Testing Strategies
+
+Unit tests (Jest), Integration tests (Supertest), E2E (Cypress), CI integration recommended.
+
+---
+
+28. Test Cases
+
+Representative test cases enumerated in markdown (TC-01 to TC-10).
+
+---
+
+29. Risk Analysis
+
+Risks and mitigations summarized: cookie config, memory usage with multer, unauthorized access, malicious uploads, brute-force, ReDoS.
+
+---
+
+30. Feasibility Study
+
+Technical, economic, operational and schedule feasibility summarized.
+
+---
+
+31. Future Enhancements
+
+Email verification, resume parsing, advanced search, interview scheduling, notifications, real-time chat, analytics dashboard.
+
+---
+
+32. Conclusion
+
+This SRS is comprehensive and suitable for academic submission, covering requirements, design, APIs, tests and risks.
+
+---
+
+33. Appendix - Environment Variables & quick-start
+
+MONGO_URI, SECRET_KEY, CLOUD_NAME, API_KEY, API_SECRET, PORT.
+
+Backend: cd backend; npm install; npm run dev.
+Frontend: cd frontend; npm install; npm run dev.
+
+---
+
+34. Bibliography
+
+Node.js, React, Express, Mongoose, Cloudinary docs, JWT references, IEEE Std 830-1998.
+
+---
+
+35. References
+
+Repeated references used earlier.
+
+---
+
+36. Screenshots Placeholders
+
+Textual placeholders for Home, Login, Signup, Profile, Job Listings, Job Description, Apply Confirmation, Recruiter Dashboard, Company Management, Post Job Form, Applicants Management.
+
+---
+
+37. Diagram Textual Descriptions
+
+System Architecture, ER Diagram, Use Case, DFD Level 0/1, Activity, Sequence, Component, Deployment — all described in the markdown.
+
+---
+
+38. Complete Lists (appendices)
+
+Detected modules, pages, APIs, DB collections, roles enumerated in markdown.
+
+---
+
+39. Recommended Immediate Code Corrections
+
+Fix cookie option typo, change apply route to POST, enforce owner checks, add validation and central error handling, replace multer storage.
+
+---
+
+40. Developer commands (run locally)
+
+See markdown quick-start.
+
+---
+
+41. Conclusion
+
+SRS final remarks.
+
+---
+
+42. Appendices & Contact
+
+Project Lead: [Student Name] — [email@example.com]
+Supervisor: [Supervisor Name] — [supervisor@example.com]
+
+End of SRS (Plain Text)
